@@ -1,16 +1,3 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
 
 nav{
   background-color: rgb(0, 217, 255);
@@ -23,5 +10,32 @@ nav{
 }
 
 a{
+  margin: 1rem;
+}
+
+.btnProductos{
+  display: inline-block;
+  border: none ;
+  border-radius: 5cm;
+  background-color: rgba(255, 255, 255, 0);
+  
+}
+.btnProductos:hover{
+  background-color: rgba(134, 134, 134, 0.24)
+}
+
+.btnAgregar{
+  margin: 1rem;
+  background-color: rgba(0, 217, 255, 0.753);
+  border: none;
+  border-radius: 5cm;
+}
+
+.btnAgregar:hover{
+  background-color:rgba(0, 217, 255, 0.452) ;
+}
+
+.contadorProductos{
+  display: inline-block;
   margin: 1rem;
 }
