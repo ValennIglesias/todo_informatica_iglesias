@@ -39,3 +39,9 @@ a{
   display: inline-block;
   margin: 1rem;
 }
+
+.productos{
+  display: flex;
+  margin: 1rem;
+  justify-content: space-evenly;
+}
