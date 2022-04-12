@@ -14,6 +14,7 @@ const products=[
     {
         id:3,
         name:"Procesador Intel Core i7 10700KF 5.1GHz ",
+        description:"Nuevo procesador Intel i7 10700KF con frecuencia turbo de 5.1 GHz y socket 1200",
         price:49500,
         img:"https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_23359_Procesador_Intel_Core_i7_10700KF_5.1GHz_Turbo_1200_Comet_Lake_3ae9893b-grn.jpg",
     },

@@ -45,3 +45,23 @@ a{
   margin: 1rem;
   justify-content: space-evenly;
 }
+
+.detalle{
+  margin: 1rem;
+  display: grid;
+  grid-template-areas: "img lista"
+              ". contador";
+}
+
+.detalle ul{
+  grid-area: lista;
+  list-style: none;
+}
+
+.detalle img{
+  grid-area: img;
+}
+
+.contadorProductos{
+  grid-area: contador;
+}
