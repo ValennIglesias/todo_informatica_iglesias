@@ -1,26 +1,24 @@
+import React from "react";
+import { Link } from "react-router-dom";
 import CarWidget from "./CarWidget";
 
 const NavBar = ()=> {
     return (
-      <>
+      
         <nav>
-          <p>
-            Todo-Informatica
-          </p>
+          
+        <p><Link to='/'>Todo-Informatica</Link> </p>
+          
           <div>
-            <a href="#">
-            Categoria 1
-            </a>
-            <a href="#">
-            Categoria 2
-            </a>
-            <a href="#">
-            Categoria 3
-            </a>
+            <Link to="/category/procesadores">Procesadores</Link>
+    
+            <Link to="/category/placas-de-video">Placas de video</Link>
+
+            <Link to="/category/motherboards">Motherboards</Link>    
           </div>
           <CarWidget/>
         </nav>
-      </>
+      
     );
   }
 

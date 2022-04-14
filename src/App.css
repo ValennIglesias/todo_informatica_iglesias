@@ -11,8 +11,12 @@ nav{
 
 a{
   margin: 1rem;
+  text-decoration: none;
 }
-
+img{
+  width: 300px;
+  height: 300px;
+}
 .btnProductos{
   display: inline-block;
   border: none ;
@@ -40,8 +44,22 @@ a{
   margin: 1rem;
 }
 
+.contenedores{
+  width: 25%;
+}
+.btnDetalle{
+  background-color: rgb(255, 255, 255);
+  
+}
+
+.btnDetalle:hover{
+  background-color:rgba(0, 217, 255, 0.452) ;
+}
 .productos{
   display: flex;
+  flex-wrap: wrap;
+  column-gap: 2rem;
+  row-gap: 3rem;
   margin: 1rem;
   justify-content: space-evenly;
 }
