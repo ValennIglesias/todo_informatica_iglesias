@@ -10,9 +10,8 @@ const Item= ({id,name,price,img})=>{
             <div>
             <h4>{name}</h4>
             <p>Precio: ${price}</p>
-            <button className="btnDetalle"><Link to={`/item/${id}`}>Detalle</Link></button>
+            <Link to={`/item/${id}`}><button className="btnDetalle">Detalle</button></Link>
             </div>
-            {<ItemCount/>}
         </div>
         
         </>
