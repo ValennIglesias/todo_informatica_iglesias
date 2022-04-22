@@ -18,7 +18,7 @@ const ItemDetailContainer = ()=>{
         .catch(error => console.log(error))
         }
         
-    },[])
+    },[Iid])
 
     return(
         <>

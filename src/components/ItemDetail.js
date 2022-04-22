@@ -1,14 +1,17 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import Buy from "./Buy"
+import { CartContext } from "./CartContext"
 import ItemCount from "./ItemCount"
 
 const ItemDetail = ({item})=>{
 
     const [itemCount, setItemCount]= useState(0)
+    const myContext = useContext(CartContext)
 
     const agregar=(cant)=>{
         alert(cant + " producto/s agregado/s")
         setItemCount(cant)
+        myContext.addToCart(item, cant)
     }
     return(
         <>

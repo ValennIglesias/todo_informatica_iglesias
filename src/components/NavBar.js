@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import CarWidget from "./CarWidget";
 
 const NavBar = ()=> {
+
+  
     return (
       
         <nav>
