@@ -34,8 +34,26 @@ const CartContextProvider = ({children})=>{
         setCartList(borrar)
     }
 
+    const calcCant = ()=>{
+        let cant = cartList.map(item=> item.cantItem)
+        console.log(cant)
+        return cant.reduce(((cantAnterior, cantNueva) => cantAnterior + cantNueva),0)
+       
+    }
+
+    const calcPriceItem= (Iid)=>{
+        let price = cartList.map(item => item.Iid).indexOf(Iid)
+        return cartList[price].priceItem * cartList[price].cantItem
+        
+    }
+
+    const calcTotal= ()=>{
+        let total = cartList.map(item => calcPriceItem(item.Iid));
+        return total.reduce((precioAnterior, precioNuevo) => precioAnterior + precioNuevo);
+    }
+
     return(
-        <CartContext.Provider value={{cartList, addToCart, removeItem, clear}}>
+        <CartContext.Provider value={{cartList, addToCart, removeItem, clear, calcCant, calcPriceItem, calcTotal}}>
             {children}
         </CartContext.Provider>
     )

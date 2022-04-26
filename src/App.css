@@ -83,3 +83,17 @@ img{
 .contadorProductos{
   grid-area: contador;
 }
+
+.eliminarTodo{
+  display: inline-block;
+}
+.productosCarrito{
+  display: block;
+  margin: 2rem;
+}
+
+.totalPrice{
+  display: inline-block;
+  border:  solid black 3px;
+  right: 0;
+}
