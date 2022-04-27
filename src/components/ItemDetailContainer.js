@@ -1,28 +1,40 @@
 import React from "react"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import customFetch from "../utils/customFetch"
-import { products } from "../utils/products"
 import ItemDetail from "./ItemDetail"
+import { doc, getDoc } from "firebase/firestore";
+import db from "../utils/firebaseConfig"
 
-const ItemDetailContainer = ()=>{
-    
-    const [detalle, setDetalle]= useState({})
-    const {Iid} = useParams()
-    
-    useEffect (()=>{
+const ItemDetailContainer = () => {
 
-        if (Iid) {
-            customFetch(2000, products.find(element=> element.id=== parseInt(Iid)))
-        .then(result =>setDetalle(result))
-        .catch(error => console.log(error))
+    const [detalle, setDetalle] = useState({})
+    const { Iid } = useParams()
+
+    useEffect(() => {
+        const fetchFirestore = async (Iid) => {
+            const docRef = doc(db, "products", Iid);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                return{ id: Iid,
+                ...docSnap.data()
+                }
+            } else {
+
+                console.log("No such document!");
+            }
+            
+            
         }
-        
-    },[Iid])
+        fetchFirestore(Iid)
+        .then(result=>setDetalle(result))
+        .catch(error=>console.log(error))
+    }, [Iid])
 
-    return(
+
+    return (
         <>
-            <ItemDetail item={detalle}/>
+            <ItemDetail item={detalle} />
         </>
     )
 }

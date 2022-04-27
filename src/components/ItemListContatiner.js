@@ -1,34 +1,41 @@
 import React from "react"
 import { useEffect, useState } from "react"
 import ItemList from "./ItemList"
-import customFetch from "../utils/customFetch"
 import { useParams } from "react-router-dom"
-const { products } = require('../utils/products')
+import { collection, doc, getDocs } from "firebase/firestore";
+import db from "../utils/firebaseConfig"
+import { query, where,  } from "firebase/firestore";
+import { orderBy } from "firebase/firestore";
 
-const ItemListContainer = ()=>{
+const ItemListContainer = () => {
 
-    const [datos, setDatos]=useState([])
-    const {Cid} = useParams()
-    
+    const [datos, setDatos] = useState([])
+    const { Cid } = useParams()
+
 
 
     useEffect(() => {
-        if (Cid === undefined) {
-            customFetch(2000, products)
-                .then(result => setDatos(result))
-                .catch(error => console.log(error))
-    }
-        else{
-            customFetch(2000, products.filter(item => item.Cid == Cid))
-                .then(result => setDatos(result))
-                .catch(error => console.log(error))
-    }
-    
-
+        const fetchFirestore = async (Cid) => {
+            let q
+            if (Cid) {
+                q = query(collection(db, "products"), where("Cid", "==", Cid));
+            } else {
+                q = query(collection(db, "products"), orderBy('name'));
+            }
             
+            const querySnapshot = await getDocs(q);
+            const dataFirestore = querySnapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+            return dataFirestore
+        }
+        fetchFirestore(Cid)
+            .then(result => setDatos(result))
+            .catch(error => console.log(error))
     }, [Cid]);
 
-    return(
+    return (
         <>
             <div className="productos"><ItemList products={datos} /></div>
         </>
