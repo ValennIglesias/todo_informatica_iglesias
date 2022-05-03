@@ -1,47 +1,84 @@
 import Reacts, { useContext } from "react"
 import BackHome from "./BackHome"
 import { CartContext } from "./CartContext"
+import { serverTimestamp } from "firebase/firestore"
+import { collection, doc, setDoc} from "firebase/firestore";
+import db from "../utils/firebaseConfig"
 
-const Cart = ()=>{
+const Cart = () => {
 
     const myContext = useContext(CartContext)
-    
-    return(
-        <>
-        <h1>Mi carrito</h1>
-        {
-            myContext.cartList.length>0
-            ?<button className="elimnarTodo" onClick={myContext.clear}>Eliminar todo</button>
-            : <BackHome/>
+
+    const comprar = () => {
+
+        let orden = {
+            comprador: {
+                name: "Alex",
+                email: "alex@coder.com",
+                phone: "123456789"
+            },
+            date: serverTimestamp(),
+
+            items: myContext.cartList.map(item => ({
+
+                id: item.Iid,
+                title: item.nameItem,
+                price: item.priceItem,
+                cant: item.cantItem
+            })),
+
+            total: myContext.calcTotal(),
+
+        }
+        const crearOrdenFirestore = async()=>{
+            const nuevaOrden = doc(collection(db, "orders"));
+            await setDoc(nuevaOrden, orden);
+            return nuevaOrden
         }
         
-        {
-            myContext.cartList.length > 0 
-            ?   myContext.cartList.map(item =>
-                <div className="productosCarrito" key={item.id}>
-                    <img src={item.imgItem}></img>
-                    <h3>Producto:{item.nameItem} </h3>
-                    <p>Precio: {item.priceItem}</p>
-                    <p>Cantidad: {item.cantItem}</p>
-                    <p>Total: {myContext.calcPriceItem(item.Iid)}</p>
-                    <button onClick={()=> myContext.removeItem(item.Iid)}>Eliminar Producto</button>
-                </div>)
-                
-        : <p>El carrito esta vacio</p>
-            
-        }
-        {
-            myContext.cartList.length > 0 &&
-            <>
-                <div className="totalPrice">
-                    Precio Total:{parseInt( myContext.calcTotal())} 
-                    
-                </div>
-                <button>Comprar</button>
-        </>
-        }    
+        crearOrdenFirestore()
+            .then(result=> alert("compra realizada tu numero de orden es: "+ result.id))
+            .catch(error=>console.log(error))
+        
+        myContext.clear()
+    }
+
+    return (
+        <>
+            <h1>Mi carrito</h1>
+            {
+                myContext.cartList.length > 0
+                    ? <button className="elimnarTodo" onClick={myContext.clear}>Eliminar todo</button>
+                    : <BackHome />
+            }
+
+            {
+                myContext.cartList.length > 0
+                    ? myContext.cartList.map(item =>
+                        <div className="productosCarrito" key={item.id}>
+                            <img src={item.imgItem}></img>
+                            <h3>Producto:{item.nameItem} </h3>
+                            <p>Precio: {item.priceItem}</p>
+                            <p>Cantidad: {item.cantItem}</p>
+                            <p>Total: {myContext.calcPriceItem(item.Iid)}</p>
+                            <button onClick={() => myContext.removeItem(item.Iid)}>Eliminar Producto</button>
+                        </div>)
+
+                    : <p>El carrito esta vacio</p>
+
+            }
+            {
+                myContext.cartList.length > 0 &&
+                <>
+                    <div className="totalPrice">
+                        Precio Total:{parseInt(myContext.calcTotal())}
+
+                    </div>
+                    <button onClick={comprar}>Comprar</button>
+                </>
+            }
         </>
     )
-    }
+}
 
 export default Cart
