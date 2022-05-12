@@ -21,8 +21,13 @@ Esta SPA (Single Page Aplication) contiene:
 
 - Un cart para poder realizar la simulacion de compra
 
+------------------------------------------------------------
 
+Dependencia
 
+-Bootstrap
+
+-----------------------------------------------
 Autor ✒️
 
 -Iglesias Valentin
