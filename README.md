@@ -1,5 +1,7 @@
 TodoInformatica
 
+![image](https://github.com/ValennIglesias/todo_informatica_iglesias/blob/master/proyecto_react.gif?raw=true)
+
 Este proyecto fue creado con [Create React App]
 
 
